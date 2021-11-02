@@ -4,4 +4,4 @@
 
 <PixiMap />
 
-<canvas id="mycanvas" class="fixed inset-0 z-0" />
+<div id="mycanvas" class="fixed inset-0 z-0" />

@@ -11,11 +11,12 @@
 		const WORLD_HEIGHT = window.innerHeight
 
 		const app = new PIXI.Application({
-			view: canvas,
 			resolution: window.devicePixelRatio,
 			antialias: true,
 			backgroundAlpha: 0
 		})
+
+		canvas.appendChild(app.view)
 
 		PIXI.settings.ANISOTROPIC_LEVEL = 16
 		PIXI.settings.MIPMAP_TEXTURES = PIXI.MIPMAP_MODES.ON
