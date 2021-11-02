@@ -60,11 +60,8 @@
 		logo.height = (logo.width * 9) / 16; // Gets 16/9 aspect ratio
 		logo.interactive = false;
 
-		const backArrow = PIXI.Sprite.from('arrow-left.png');
-		backArrow.alpha = 0;
-		backArrow.width = WORLD_WIDTH * 0.005;
-		backArrow.height = backArrow.width;
-		backArrow.interactive = false;
+		const arrowTexture = PIXI.Texture.from('arrow-left.png');
+		const arrows = [];
 
 		container.x = WORLD_WIDTH * 0.05;
 		container.y = WORLD_HEIGHT * 0.05;
@@ -86,6 +83,14 @@
 			boxes[key].interactive = true;
 			boxes[key].interactiveChilren = true;
 			boxes[key].cursor = 'pointer';
+			
+			arrows[key] = new PIXI.Sprite(arrowTexture)
+			arrows[key].alpha = 0;
+			arrows[key].width = WORLD_WIDTH * 0.005;
+			arrows[key].height = arrows[key].width;
+			arrows[key].interactive = false;
+
+			boxes[key].addChild(arrows[key])
 
 			Object.values(boxNames[key]).forEach((e: string) => {
 				subboxes[e] = new PIXI.Graphics();
@@ -109,7 +114,6 @@
 				let wasDragging = isDragging;
 				isDragging = false;
 				if (!wasDragging) {
-					boxes[key].interactive = false;
 					if (
 						t.target.width / window.innerWidth >
 						t.target.height / (window.innerHeight - navbar.offsetHeight)
@@ -133,18 +137,28 @@
 						WORLD_HEIGHT * 0.05 - navbar.offsetHeight / 10 + t.target.y + t.target.height / 2,
 						{ removeOnComplete: true, friction: 0, time: 750, interrupt: false }
 					);
-					boxes[key].cursor = 'auto';
+					Object.values(boxes).forEach((e: PIXI.Graphics2) => {
+						e.cursor = 'auto'
+						e.interactive = false
+					});
 					viewport.drag({ pressDrag: false });
-					backArrow.alpha = 1;
-					backArrow.x = boxes[key].x * 0.05;
-					backArrow.y = backArrow.x;
-					backArrow.interactive = true;
-					backArrow.cursor = 'pointer';
-					backArrow.on('click', () => {
+					arrows[key].alpha = 1;
+					arrows[key].x = 8;
+					arrows[key].y = arrows[key].x;
+					arrows[key].interactive = true;
+					arrows[key].cursor = 'pointer';
+					arrows[key].on('click', () => {
 						viewport.drag({ pressDrag: true });
-						boxes[key].cursor = 'pointer';
-						backArrow.alpha = 0;
-						backArrow.interactive = false;
+						Object.values(boxes).forEach(e => {
+							e.cursor = 'pointer'
+						});
+						setTimeout(() => {
+							Object.values(boxes).forEach(e => {
+								e.interactive = true
+							});
+						}, 750);
+						arrows[key].alpha = 0;
+						arrows[key].interactive = false;
 						viewport.clampZoom({
 							minWidth: null,
 							maxWidth: null,
@@ -166,9 +180,6 @@
 							time: 750,
 							interrupt: false
 						});
-						setTimeout(() => {
-							boxes[key].interactive = true;
-						}, 750);
 						value.forEach((e: string) => {
 							subboxes[e].interactive = false;
 							subboxes[e].cursor = 'auto';
@@ -184,8 +195,6 @@
 				}
 			});
 		}
-
-		boxes['box_fsn'].addChild(backArrow);
 
 		boxes['box_fsn'].x = (logo.width * 5.5) / 64;
 		boxes['box_fsn'].y = (logo.height * 1.5) / 36;
