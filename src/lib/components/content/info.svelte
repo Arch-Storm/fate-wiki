@@ -1,5 +1,10 @@
 <script lang="ts">
-	export let content;
+	type contentObject = { 
+		[key: string]: any;
+		roles: [ { [key: string]: string } ];
+		abilities: [ { [key: string]: string } ];
+	}
+	export let content: contentObject;
 </script>
 
 <!--------------------------------- Right Sidebar/Info ---------------------------------->
