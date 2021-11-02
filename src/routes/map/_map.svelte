@@ -1,34 +1,35 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { onMount } from 'svelte';
+	import type * as PIXI from 'pixi.js';
 	onMount(async () => {
-		const PIXI = await import('pixi.js')
-		const { Viewport } = await import('pixi-viewport')
+		const PIXI = await import('pixi.js');
+		const { Viewport } = await import('pixi-viewport');
 
-		const canvas = document.getElementById('mycanvas')
-		const navbar = document.getElementById('navbar')
+		const canvas = document.getElementById('mycanvas');
+		const navbar = document.getElementById('navbar');
 
-		const WORLD_WIDTH = window.innerWidth
-		const WORLD_HEIGHT = window.innerHeight
+		const WORLD_WIDTH = window.innerWidth;
+		const WORLD_HEIGHT = window.innerHeight;
 
 		const app = new PIXI.Application({
 			resolution: window.devicePixelRatio,
 			antialias: true,
 			backgroundAlpha: 0
-		})
+		});
 
-		canvas.appendChild(app.view)
+		canvas.appendChild(app.view);
 
-		PIXI.settings.ANISOTROPIC_LEVEL = 16
-		PIXI.settings.MIPMAP_TEXTURES = PIXI.MIPMAP_MODES.ON
+		PIXI.settings.ANISOTROPIC_LEVEL = 16;
+		PIXI.settings.MIPMAP_TEXTURES = PIXI.MIPMAP_MODES.ON;
 
 		const viewport = new Viewport({
 			worldWidth: WORLD_WIDTH,
 			worldHeight: WORLD_HEIGHT,
 
 			interaction: app.renderer.plugins.interaction
-		})
+		});
 
-		app.stage.addChild(viewport)
+		app.stage.addChild(viewport);
 
 		viewport
 			.pinch()
@@ -44,14 +45,14 @@
 				top: -viewport.worldHeight * 0.25,
 				right: viewport.worldWidth * 1.25,
 				bottom: viewport.worldHeight * 1.25
-			})
+			});
 
-		viewport.interactive = true
-		viewport.interactiveChildren = true
+		viewport.interactive = true;
+		viewport.interactiveChildren = true;
 
-		const container = new PIXI.Container()
-		container.interactive = true
-		container.interactiveChildren = true
+		const container = new PIXI.Container();
+		container.interactive = true;
+		container.interactiveChildren = true;
 
 		const logo = PIXI.Sprite.from('map_2x2.webp');
 		logo.x = WORLD_WIDTH * 0.05;
@@ -83,14 +84,14 @@
 			boxes[key].interactive = true;
 			boxes[key].interactiveChilren = true;
 			boxes[key].cursor = 'pointer';
-			
-			arrows[key] = new PIXI.Sprite(arrowTexture)
+
+			arrows[key] = new PIXI.Sprite(arrowTexture);
 			arrows[key].alpha = 0;
 			arrows[key].width = WORLD_WIDTH * 0.005;
 			arrows[key].height = arrows[key].width;
 			arrows[key].interactive = false;
 
-			boxes[key].addChild(arrows[key])
+			boxes[key].addChild(arrows[key]);
 
 			Object.values(boxNames[key]).forEach((e: string) => {
 				subboxes[e] = new PIXI.Graphics();
@@ -137,9 +138,9 @@
 						WORLD_HEIGHT * 0.05 - navbar.offsetHeight / 10 + t.target.y + t.target.height / 2,
 						{ removeOnComplete: true, friction: 0, time: 750, interrupt: false }
 					);
-					Object.values(boxes).forEach((e: PIXI.Graphics2) => {
-						e.cursor = 'auto'
-						e.interactive = false
+					Object.values(boxes).forEach((e: PIXI.Graphics) => {
+						e.cursor = 'auto';
+						e.interactive = false;
 					});
 					viewport.drag({ pressDrag: false });
 					arrows[key].alpha = 1;
@@ -149,12 +150,12 @@
 					arrows[key].cursor = 'pointer';
 					arrows[key].on('click', () => {
 						viewport.drag({ pressDrag: true });
-						Object.values(boxes).forEach(e => {
-							e.cursor = 'pointer'
+						Object.values(boxes).forEach((e: PIXI.Graphics) => {
+							e.cursor = 'pointer';
 						});
 						setTimeout(() => {
-							Object.values(boxes).forEach(e => {
-								e.interactive = true
+							Object.values(boxes).forEach((e: PIXI.Graphics) => {
+								e.interactive = true;
 							});
 						}, 750);
 						arrows[key].alpha = 0;

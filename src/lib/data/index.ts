@@ -3,7 +3,7 @@ export const db = {
 		title: 'Home',
 		type: 'home',
 		info: '<div class="text-xl">The new and interactive Wiki about everything TYPE-MOON</div><br><div>Welcome to the TYPE-MOON Wiki, a wiki that hopes to archive all information about the universe(s) that TYPE-MOON has created.</div><br><div>SPOILER ALERT WARNING: This Wiki contains heavy spoilers, please proceed at your own risk!</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>'
-		},
+	},
 	shirou_emiya: {
 		title: 'Shirou Emiya',
 		type: 'character',

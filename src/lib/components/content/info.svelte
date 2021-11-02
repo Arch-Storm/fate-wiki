@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	export let content;
 </script>
 
@@ -30,11 +30,8 @@
 <!------------------------------------ Main Content ------------------------------------->
 
 {#if content.type === 'home'}
-
 	{@html content.info}
-	
 {:else if content.type === 'media'}
-
 	<div class="text-2xl font-bold">Story</div>
 	<br />
 
@@ -51,9 +48,7 @@
 	<div class="text-2xl font-bold">Development</div>
 	<br />
 	{@html content.development}<br /><br />
-
 {:else if content.type === 'character'}
-
 	<div class="text-2xl font-bold">Profile</div>
 	<br />
 
@@ -95,5 +90,4 @@
 	<div class="text-xl">Reception</div>
 	<br />
 	{@html content.reception}
-
 {/if}
