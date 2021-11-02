@@ -74,7 +74,7 @@
 		const boxNames = {
 			box_fe: ['el_melloi', 'fate_strange_fake'],
 			box_fsn: ['fate_stay_night', 'fate_zero', 'fate_hollow_ataraxia'],
-			box_cp: ['carneval_phantasm'],
+			box_cp: ['carnival_phantasm'],
 			box_t: ['tsukihime', 'ka', 'melty_blood'],
 			box_knk: ['kara_no_kyoukai', 'mahoyo'],
 			box_ex: ['fate_extra', 'fate_extra_ccc']
