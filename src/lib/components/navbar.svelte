@@ -7,8 +7,8 @@
 	// List of navigation items
 	const navItems = [
 		{ label: 'Map', href: '/map' },
-		{ label: 'Characters', href: '/characters' },
-		{ label: 'Community', href: '/community' }
+		{ label: 'Characters', href: '#' },
+		{ label: 'Community', href: '#' }
 	];
 
 	// Mobile menu click event handler
