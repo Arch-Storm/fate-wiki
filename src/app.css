@@ -1,0 +1,9 @@
+/* Write your global styles here, in PostCSS syntax */
+
+.bg-gradient {
+	background-image: linear-gradient(to right top, #1d409e, #a7399a, #f14877, #ff834a, #fcc92e);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
